@@ -10,10 +10,10 @@ global {
 //	shape_file building_file <- shape_file("../maps/buildings.shp"); //fixed not whole mayondon
 
 	geometry shape <- envelope(road_file);
-	graph road_network;
+	graph road_network; 
 	
-	int numeros_perros_macho <- 17; // Número inicial de perros macho 65.5% machos
-	int numeros_perro_hembra <- 9; // Número inicial de perros hembra
+	int numeros_perros_macho <- 44; // Número inicial de perros macho 65.5% machos
+	int numeros_perro_hembra <- 23; // Número inicial de perros hembra
 	float velocidad_agente <- 4 #km / #h;
 	float probabilidad_crianza <- 0.02; //Probabilidad de reproducirse (breed) cuando se cumple la condición 
 	//(por ejemplo, macho encuentra hembra adulta). En cada oportunidad de cruce, se evalúa un flip(probabilidad_crianza) para decidir si efectivamente ocurre la reproducción.
@@ -38,29 +38,29 @@ global {
 	
 	
 	
-	list<list<string>> registros_reproducciones <- [];
+//	list<list<string>> registros_reproducciones <- [];
 	bool header_written <- false;
-	list<string> registro_reproduccion <- [];
+//	list<string> registro_reproduccion <- [];
 	
 	
-    action write_reproductions_csv {
-        string file_path <- "../output/reproducciones.csv";
-        string delimiter <- ",";
-
-        // Escribir el encabezado (reemplazar si el archivo ya existe)
-        save "cycle" + delimiter + "location_x" + delimiter + "location_y" + delimiter + "num_crias" to: file_path type: "text" rewrite: true;
-
-		loop tmp over: registros_reproducciones { 		
-			
-			save [name, location, host] to: "save_data.csv" format: "csv";
-				
-          	string line <- string(tmp at 0) + delimiter + string(tmp at 1) + delimiter + string(tmp at 2) + delimiter + string(tmp at 3);
-            save line to: file_path type: "text" rewrite: false; // Append to the file
-		}
-        
-       
-        write "Archivo CSV de reproducciones guardado en: " + file_path; // Mensaje de confirmación
-    }
+//    action write_reproductions_csv {
+//        string file_path <- "../output/reproducciones.csv";
+//        string delimiter <- ",";
+//
+//        // Escribir el encabezado (reemplazar si el archivo ya existe)
+//        save "cycle" + delimiter + "location_x" + delimiter + "location_y" + delimiter + "num_crias" to: file_path type: "text" rewrite: true;
+//
+//		loop tmp over: registros_reproducciones { 		
+//			
+//			save [name, location, host] to: "save_data.csv" format: "csv";
+//				
+//          	string line <- string(tmp at 0) + delimiter + string(tmp at 1) + delimiter + string(tmp at 2) + delimiter + string(tmp at 3);
+//            save line to: file_path type: "text" rewrite: false; // Append to the file
+//		}
+//        
+//       
+//        write "Archivo CSV de reproducciones guardado en: " + file_path; // Mensaje de confirmación
+//    }
     
     
 	
@@ -211,24 +211,24 @@ species perros_hembra skills: [moving]{
 				location <- myself.location;
 			}
 			
-			// --- CÓDIGO MODIFICADO: AHORA GUARDA EN LA LISTA GLOBAL ---
-            list<string> fila_registro <- [
-                string(cycle),
-                string(location.x),
-                string(location.y),
-                string(numero_crias)
-            ];
-            add fila_registro to: registros_reproducciones;
+
+//            list<string> fila_registro <- [
+//                string(cycle),
+//                string(location.x),
+//                string(location.y),
+//                string(numero_crias)
+//            ];
+//            add fila_registro to: registros_reproducciones;
             
             
             
-             list<string> registro <- [
-                string(cycle),
-                string(location.x),
-                string(location.y),
-                string(numero_crias)
-            ];
-            registro_reproduccion <- [string(cycle),string(location.x),string(location.y),string(numero_crias)];
+//             list<string> registro <- [
+//                string(cycle),
+//                string(location.x),
+//                string(location.y),
+//                string(numero_crias)
+//            ];
+//            registro_reproduccion <- [string(cycle),string(location.x),string(location.y),string(numero_crias)];
             
             
             
